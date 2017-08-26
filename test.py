@@ -54,6 +54,6 @@ class testGraph(unittest.TestCase):
 
 	def testConnection(self):
 		self.assertEqual(self.graph.connect('a', 'b'), False)
-sdss
+
 if __name__ == '__main__':
 	unittest.main()
