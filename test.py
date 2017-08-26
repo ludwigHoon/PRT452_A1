@@ -29,6 +29,14 @@ class testNode(unittest.TestCase):
 		self.assertTrue(self.node.addNeighbour('a'))
 		self.assertEqual(self.node.neighbour, ['a'])
 		
+	def testAddMultipleNeighbour(self):
+		names=list()
+		for i in range(10):
+			name=chr(ord('a')+i)
+			names.append(name)
+			self.assertTrue(self.node.addNeighbour(name))
+		self.assertEqual(self.node.neighbour, names)
+		
 class testGraph(unittest.TestCase):
 	#Setting up
 	def setUp(self):
@@ -50,10 +58,26 @@ class testGraph(unittest.TestCase):
 		
 	#Testing the creation of an edge
 	def testEdgeCreation(self):
-		self.assertTrue(self.graph.newEdge('a', 'b'))
+		#Creating an edge when the nodes do not exist
+		self.assertFalse(self.graph.newEdge('a', 'b'))
+		
+		#Creating an edge when only one node exists
+		self.assertFalse(self.graph.newEdge('a', 'b'))
+		#Creating an edge when both nodes exist
+		
 
 	def testConnection(self):
+		#Testing the connection when the nodes do not exist
 		self.assertEqual(self.graph.connect('a', 'b'), False)
+		
+		#Testing the connection when only one node exists
+		self.assertEqual(self.graph.connect('a', 'b'), False)
+		
+		#Testing the connection when both nodes exist, but not connected
+		self.assertEqual(self.graph.connect('a', 'b'), False)
+		
+		#Testing the connection when both nodes exists and connected
+		self.assertEqual(self.graph.connect('a', 'b'), True)
 
 if __name__ == '__main__':
 	unittest.main()
