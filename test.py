@@ -12,6 +12,23 @@ This graph program will have the following implementations:
 2. The graph is represented in python dictionary 
 '''
 
+class testNode(unittest.TestCase):
+	#Setting up node for testing
+	def setUp(self):
+		self.node=g.node('a')
+	
+	#Checking if the node is named correctly
+	def testNodeName(self):
+		self.assertEqual(self.node.id, 'a')
+	
+	#Checking if the node neighbour is correct
+	def testNodeNeighbour(self):
+		self.assertEqual(self.node.neighbour, [])
+
+	def testAddNeighbour(self):
+		self.assertTrue(self.node.addNeighbour('a'))
+		self.assertEqual(self.node.neighbour, ['a'])
+		
 class testGraph(unittest.TestCase):
 	#Setting up
 	def setUp(self):
@@ -25,18 +42,15 @@ class testGraph(unittest.TestCase):
 	def testNodeCreation(self):
 		self.assertTrue(self.graph.newNode('a'))
 	
-	#Testing the creation of multiple node
-	def testNodesCreation(self):
+	#Testing creation of multiple nodes
+	def testMultipleNodesCreation(self):
 		for i in range(10):
-			self.assertTrue(self.graph.newNode(i))
-	
-	
+			name=chr(ord('a')+i)
+			self.assertTrue(self.graph.newNode(name))
+		
 	#Testing the creation of an edge
-	
-	
-	
+	def testEdgeCreation(self):
+		self.assertTrue(self.graph.newEdge('a', 'b'))
 
-if __name__== '__main__':
+if __name__ == '__main__':
 	unittest.main()
-	testGraph.graphCreation()
-	
