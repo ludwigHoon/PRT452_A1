@@ -26,6 +26,8 @@ class graph:
 		
 	def newEdge(self, nodeA, nodeB):
 		return True
-
+	
+	def connect(self, nodeA, nodeB):
+		return False
 	
 	

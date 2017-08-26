@@ -52,5 +52,8 @@ class testGraph(unittest.TestCase):
 	def testEdgeCreation(self):
 		self.assertTrue(self.graph.newEdge('a', 'b'))
 
+	def testConnection(self):
+		self.assertEqual(self.graph.connect('a', 'b'), False)
+
 if __name__ == '__main__':
 	unittest.main()
