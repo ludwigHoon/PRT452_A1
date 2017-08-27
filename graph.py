@@ -10,17 +10,6 @@ Expected user input:
 3. Name/ID of nodes
 4. Pairs of nodes that are connected
 '''
-'''
-class node:
-	def __init__(self, name):
-		self.id=name
-		self.neighbour=list()
-		return None
-		
-	def addNeighbour(self, node):
-		self.neighbour.append(node)
-		return True
-'''
 
 class graph:
 	def __init__(self):
