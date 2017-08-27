@@ -5,21 +5,17 @@ Email: ldwgkshoon@gmail.com
 
 '''
 Expected user input:
-1. Number of nodes
-2. Number of edges
-3. Name/ID of nodes
-4. Pairs of nodes that are connected
+1. Nodes' ID/name
+2. Nodes' ID/name that are connected
 '''
 
 class graph:
 	def __init__(self):
 		self.nodes=dict()
-		self.numNodes=0
 		return None
 	
 	def newNode(self, name):
 		if not (name in self.nodes.keys()):
-			self.numNodes+=1
 			self.nodes[name]=list()
 			return True
 		else:
@@ -41,7 +37,7 @@ class graph:
 	
 	def connect(self, nodeA, nodeB):
 		if (nodeA in self.nodes.keys() and nodeB in self.nodes.keys()):
-			if (nodeA in self.nodes[nodeB]) and (nodeB in self.nodes[nodeA]):
+			if (nodeA in self.nodes[nodeB] and nodeB in self.nodes[nodeA]):
 				return True
 			else:
 				return False
