@@ -97,11 +97,11 @@ class testGraph(unittest.TestCase):
 	def testConnection(self):
 		self.setUp()
 		#Testing the connection when the nodes do not exist
-		self.assertFalse(self.graph.connect('a', 'b'))
+		self.assertFalse(self.graph.connect('a', 'b'), "Nodes not in graph")
 		
 		#Testing the connection when only one node exists
 		self.assertTrue(self.graph.newNode('a'))
-		self.assertFalse(self.graph.connect('a', 'b'))
+		self.assertFalse(self.graph.connect('a', 'b'), "Nodes not in graph")
 		
 		#Testing the connection when both nodes exist, but not connected
 		self.assertTrue(self.graph.newNode('b'))
