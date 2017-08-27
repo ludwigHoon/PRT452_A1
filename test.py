@@ -24,11 +24,15 @@ class testNode(unittest.TestCase):
 	#Checking if the node neighbour is correct
 	def testNodeNeighbour(self):
 		self.assertEqual(self.node.neighbour, [])
-
+	
+	#Checking if node is able to add neighbour
 	def testAddNeighbour(self):
 		self.assertTrue(self.node.addNeighbour('a'))
 		self.assertEqual(self.node.neighbour, ['a'])
-		
+		self.assertTrue(self.node.addNeighbour('b'))
+		self.assertEqual(self.node.neighbour, ['a', 'b'])
+
+	#Checking if node is able to add multiple neighbours
 	def testAddMultipleNeighbour(self):
 		names=list()
 		for i in range(10):
@@ -49,6 +53,7 @@ class testGraph(unittest.TestCase):
 	#Testing the creation of a node
 	def testNodeCreation(self):
 		self.assertTrue(self.graph.newNode('a'))
+		self.assertEqual(self.graph.nodes, {'a':[]})
 	
 	#Testing creation of multiple nodes
 	def testMultipleNodesCreation(self):
@@ -62,21 +67,45 @@ class testGraph(unittest.TestCase):
 		self.assertFalse(self.graph.newEdge('a', 'b'))
 		
 		#Creating an edge when only one node exists
+		self.assertTrue(self.graph.newNode('a'))
 		self.assertFalse(self.graph.newEdge('a', 'b'))
-		#Creating an edge when both nodes exist
 		
-
+		#Creating an edge when both nodes exist
+		self.assertTrue(self.graph.newNode('b'))
+		self.assertTrue(self.graph.newEdge('a', 'b'))
+		
+		#Ensuring that the edge reflects the nodes are connected
+		self.assertEqual(self.nodes['a'], 'b')
+		self.assertEqual(self.nodes['b'], 'a')
+		
+	def testEdgesCreation(self):
+		#Creating 2 edges between 3 nodes that exist
+		self.assertTrue(self.graph.newNode('a'))
+		self.assertTrue(self.graph.newNode('b'))
+		self.assertTrue(self.graph.newNode('c'))
+		self.assertFalse(self.graph.newEdge('a', 'b'))
+		self.assertFalse(self.graph.newEdge('b', 'c'))
+		self.assertEqual(self.nodes['a'], 'b')
+		self.assertEqual(self.nodes['b'], ['a', 'c'])
+		self.assertEqual(self.nodes['c'], 'b')
+				
 	def testConnection(self):
 		#Testing the connection when the nodes do not exist
 		self.assertEqual(self.graph.connect('a', 'b'), False)
 		
 		#Testing the connection when only one node exists
+		self.assertTrue(self.graph.newNode('a'))
 		self.assertEqual(self.graph.connect('a', 'b'), False)
 		
 		#Testing the connection when both nodes exist, but not connected
+		self.assertTrue(self.graph.newNode('a'))
+		self.assertTrue(self.graph.newNode('b'))
 		self.assertEqual(self.graph.connect('a', 'b'), False)
 		
-		#Testing the connection when both nodes exists and connected
+		#Testing the connection when both nodes exists and are connected
+		self.assertTrue(self.graph.newNode('a'))
+		self.assertTrue(self.graph.newNode('b'))
+		self.assertFalse(self.graph.newEdge('a', 'b'))
 		self.assertEqual(self.graph.connect('a', 'b'), True)
 
 if __name__ == '__main__':
