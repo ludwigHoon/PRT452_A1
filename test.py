@@ -95,6 +95,7 @@ class testGraph(unittest.TestCase):
 		self.assertEqual(self.graph.nodes['c'], ['b'])
 				
 	def testConnection(self):
+		self.setUp()
 		#Testing the connection when the nodes do not exist
 		self.assertFalse(self.graph.connect('a', 'b'))
 		

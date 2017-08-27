@@ -51,7 +51,14 @@ class graph:
 				return True
 	
 	def connect(self, nodeA, nodeB):
-		return False
+		if (nodeA in self.nodes.keys() and nodeB in self.nodes.keys()):
+			if (nodeA in self.nodes[nodeB]) and (nodeB in self.nodes[nodeA]):
+				return True
+			else:
+				return False
+		else:
+			return False
+
 
 def option():
 	print('1. Input graph')
