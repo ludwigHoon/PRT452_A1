@@ -10,7 +10,7 @@ Expected user input:
 3. Name/ID of nodes
 4. Pairs of nodes that are connected
 '''
-
+'''
 class node:
 	def __init__(self, name):
 		self.id=name
@@ -20,6 +20,7 @@ class node:
 	def addNeighbour(self, node):
 		self.neighbour.append(node)
 		return True
+'''
 
 class graph:
 	def __init__(self):
@@ -28,13 +29,26 @@ class graph:
 		return None
 	
 	def newNode(self, name):
-		newNode=node(name)
-		self.numNodes+=1
-		self.nodes[newNode.id]=list()
-		return True
+		if not (name in self.nodes.keys()):
+			self.numNodes+=1
+			self.nodes[name]=list()
+			return True
+		else:
+			print("Node already exists")
+			return False
 		
 	def newEdge(self, nodeA, nodeB):
-		return True
+		if not (nodeA in self.nodes.keys() and nodeB in self.nodes.keys()):
+			print("Nodes not here yet")
+			return False
+		else:
+			if (nodeA in self.nodes[nodeB] or nodeB in self.nodes[nodeA]):
+				print('Edge already exists')
+				return False
+			else:
+				self.nodes[nodeA].append(nodeB)
+				self.nodes[nodeB].append(nodeA)
+				return True
 	
 	def connect(self, nodeA, nodeB):
 		return False
